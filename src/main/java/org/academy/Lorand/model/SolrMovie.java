@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.solr.client.solrj.beans.Field;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
+import org.springframework.data.solr.repository.Facet;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class SolrMovie implements Serializable {
     @Field
     @Indexed
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
 
     @Field
     @Indexed
@@ -67,7 +68,7 @@ public class SolrMovie implements Serializable {
     public SolrMovie() {
     }
 
-    public SolrMovie(Integer id, String title, String year, String released, String plot, String genre, String imdbRating, String actors, String writer, String director) {
+    public SolrMovie(String id, String title, String year, String released, String plot, String genre, String imdbRating, String actors, String writer, String director) {
         this.id = id;
         this.title = title;
         this.year = year;
@@ -80,11 +81,11 @@ public class SolrMovie implements Serializable {
         this.director = director;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

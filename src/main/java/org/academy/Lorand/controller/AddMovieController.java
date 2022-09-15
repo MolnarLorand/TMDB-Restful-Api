@@ -54,4 +54,6 @@ public class AddMovieController {
     public List<Movie> getAllMovies(){
         return movieService.getAllMoviesFromDb();
     }
+
+
 }
