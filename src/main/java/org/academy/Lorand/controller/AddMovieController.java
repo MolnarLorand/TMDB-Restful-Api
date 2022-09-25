@@ -106,6 +106,7 @@ public class AddMovieController {
     @PostMapping("/createMovies")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Movie> addMovies(@RequestBody List<Movie> movies){
+
         return movieService.addMovies(movies);
     }
 
