@@ -19,4 +19,7 @@ public interface SolrMovieRepository extends SolrCrudRepository<SolrMovie,Intege
 
     List<SolrMovie> findAllByPlot(String plot);
 
+    SolrMovie findByPlot(String plot);
+
+    List<SolrMovie> findAll();
 }

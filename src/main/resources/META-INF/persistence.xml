@@ -7,7 +7,7 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <!-- Entity classes -->
-        <class>package org.academyLorand.model.Movie</class>
+        <class>package org.academy.Lorand.model.Movie</class>
 
 
         <properties>

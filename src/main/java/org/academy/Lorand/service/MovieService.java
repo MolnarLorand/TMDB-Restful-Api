@@ -6,6 +6,7 @@ import info.movito.themoviedbapi.TmdbSearch;
 import info.movito.themoviedbapi.model.MovieDb;
 import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import info.movito.themoviedbapi.model.people.PersonCast;
+import info.movito.themoviedbapi.model.people.PersonCrew;
 import org.academy.Lorand.model.Movie;
 import org.academy.Lorand.model.QMovie;
 import org.academy.Lorand.model.SolrMovie;
@@ -30,48 +31,8 @@ public class MovieService {
     @Autowired
     private SolrMovieRepository solrMovieRepository;
 
-    public JPAQueryFactory getJpaQueryFactory() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MovieCatalog");
-        EntityManager em = emf.createEntityManager();
-        return new JPAQueryFactory(em);
-    }
 
-    public List<Movie> getMovieListForController() {
-        return getJpaQueryFactory().selectFrom(QMovie.movie).fetch();
-    }
-
-
-    public MovieService() {
-    }
-
-    public Movie saveMovie(Movie movie) {
-        return movieRepository.save(movie);
-    }
-
-    public List<Movie> saveMovies(List<Movie> movies) {
-        return movieRepository.saveAll(movies);
-    }
-
-/*
-    public List<Movie> getMovies() {
-        return movieRepository.findAll();
-    }
-*/
-
-    public Movie getMovieById(Integer id) {
-        return movieRepository.findById(id).orElse(null);
-    }
-
-    public Movie getMovieByTitle(String title) {
-        return movieRepository.findByTitle(title);
-    }
-
-    public String deleteMovie(Integer id) {
-        movieRepository.deleteById(id);
-        return "Movie removed for id: " + id + ".";
-    }
-
-    public Movie updateMovie(Movie movie) {
+/*    public Movie updateMovie(Movie movie) {
         Movie existingMovie = movieRepository.findById(movie.getId()).orElse(null);
         existingMovie.setTitle(movie.getTitle());
         existingMovie.setYear(movie.getYear());
@@ -83,7 +44,7 @@ public class MovieService {
         existingMovie.setWriter(movie.getWriter());
         existingMovie.setDirector(movie.getDirector());
         return movieRepository.save(existingMovie);
-    }
+    }*/
 
     //--------------------------------------------******--------------------------------------------------------\\
     public Movie convertMovie(MovieDb movieResult) {
@@ -102,6 +63,13 @@ public class MovieService {
         }
         movie.setActors(String.join(",", actorNames)
         );
+
+/*        List<PersonCrew> crew = new TmdbApi("8b9bb031f80795a5c6523639af860e23").getMovies().getCredits(movieResult.getId()).getCrew();
+        List<String> crewNames = new ArrayList<>();
+        for (PersonCrew crewMember:crew
+             ) {
+            movie.setDirector(String.join(",",crewNames));
+        }*/
 
         return movie;
     }
@@ -133,6 +101,7 @@ public class MovieService {
         solrMovie.setTitle(movie.getTitle());
         solrMovie.setReleased(movie.getReleased());
         solrMovie.setPlot(movie.getPlot());
+        solrMovie.setActors(movie.getActors());
 
         return solrMovie;
     }
@@ -154,7 +123,42 @@ public class MovieService {
 
     }
 
-    public List<Movie> getAllMoviesFromDb(){
+    public List<Movie> getAllMoviesFromDb() {
         return movieRepository.findAll();
     }
+
+    public String deleteMovie(Integer id) {
+        movieRepository.deleteById(id);
+        return "Movie with id: " + id + " was deleted form db";
+    }
+
+    public Movie getMovieByTitle(String title) {
+        return movieRepository.findByTitle(title);
+    }
+
+    public Movie getMovieById(Integer id) {
+        return movieRepository.findById(id).orElse(null);
+    }
+
+    public Movie updateMovie(Integer Id, Movie movie) {
+        Movie dbMovie = movieRepository.findById(movie.getId()).orElse(null);
+        assert dbMovie != null;
+        dbMovie.setYear(dbMovie.getYear());
+        dbMovie.setTitle(dbMovie.getTitle());
+        dbMovie.setReleased(dbMovie.getReleased());
+        dbMovie.setPlot(dbMovie.getPlot());
+
+        return movieRepository.save(dbMovie);
+    }
+
+    public Movie addMovie(Movie newMovie) {
+
+        return movieRepository.save(newMovie);
+        //raw json in postman
+    }
+
+    public List<Movie> addMovies(List<Movie> movies){
+        return movieRepository.saveAll(movies);
+    }
+
 }

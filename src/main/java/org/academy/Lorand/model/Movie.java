@@ -3,8 +3,6 @@ package org.academy.Lorand.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.solr.client.solrj.beans.Field;
-import org.springframework.data.solr.core.mapping.SolrDocument;
-
 
 import javax.persistence.*;
 import java.io.Serializable;
