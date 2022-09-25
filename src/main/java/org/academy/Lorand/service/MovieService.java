@@ -31,21 +31,6 @@ public class MovieService {
     @Autowired
     private SolrMovieRepository solrMovieRepository;
 
-
-/*    public Movie updateMovie(Movie movie) {
-        Movie existingMovie = movieRepository.findById(movie.getId()).orElse(null);
-        existingMovie.setTitle(movie.getTitle());
-        existingMovie.setYear(movie.getYear());
-        existingMovie.setReleased(movie.getReleased());
-        existingMovie.setPlot(movie.getPlot());
-        existingMovie.setGenre(movie.getGenre());
-        existingMovie.setImdbRating(movie.getImdbRating());
-        existingMovie.setActors(movie.getActors());
-        existingMovie.setWriter(movie.getWriter());
-        existingMovie.setDirector(movie.getDirector());
-        return movieRepository.save(existingMovie);
-    }*/
-
     //--------------------------------------------******--------------------------------------------------------\\
     public Movie convertMovie(MovieDb movieResult) {
         Movie movie = new Movie();

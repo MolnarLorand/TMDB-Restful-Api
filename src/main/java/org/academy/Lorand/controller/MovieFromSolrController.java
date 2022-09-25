@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/solr")
-public class GetMovieFromSolr {
+public class MovieFromSolrController {
 
     @Autowired
     MovieService movieService;

@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/tmdb")
-public class AddMovieController {
+public class MovieController {
 
     @Autowired
     private MovieService movieService;
@@ -61,13 +61,13 @@ public class AddMovieController {
     @ResponseBody
     public void saveMovies(@RequestParam String query, @RequestParam Integer pageStart, @RequestParam Integer pageEnd){
         movieService.uploadMoviesToDb(query,pageStart,pageEnd);
-    } //select movies from external db to save in my db
+    }
 
     @GetMapping("/solr")
     @ResponseBody
     public void toSolr(){
         movieService.migrateToSolr();
-    }//migrate movies from db to solr
+    }
 
     @GetMapping("/getAllMovies")
     @ResponseBody
