@@ -1,3 +1,5 @@
 *.java linguist-detectable=true
 *.vba linguist-detectable=false
-*.vba6.0 linguist-detectable=false
+*.js linguist-detectable=true 
+*.html linguist-detectable=true  
+*.xml linguist-detectable=true  
